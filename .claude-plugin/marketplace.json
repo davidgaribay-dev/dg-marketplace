@@ -1,0 +1,44 @@
+{
+  "name": "claude-code-marketplace",
+  "owner": {
+    "name": "David Garibay",
+    "email": "me@davidgaribay.dev"
+  },
+  "metadata": {
+    "description": "A curated collection of Claude Code plugins for Git workflows and developer productivity",
+    "version": "1.0.0",
+    "license": "MIT",
+    "homepage": "https://github.com/davidgaribay-dev/claude-code-marketplace",
+    "repository": "https://github.com/davidgaribay-dev/claude-code-marketplace"
+  },
+  "plugins": [
+    {
+      "name": "worktree",
+      "source": "./.claude/skills/worktree",
+      "description": "Create Git worktrees for parallel development. Creates standardized worktree structure in adjacent directory for working on multiple features simultaneously.",
+      "category": "productivity",
+      "tags": ["git", "worktree", "workflow", "parallel-development"],
+      "version": "1.0.0",
+      "author": {
+        "name": "David Garibay"
+      },
+      "license": "MIT",
+      "repository": "https://github.com/davidgaribay-dev/claude-code-marketplace",
+      "strict": false
+    },
+    {
+      "name": "git-commit-push",
+      "source": "./.claude/commands/git-commit-push.md",
+      "description": "Interactive git workflow with approval gates for reviewing changes, generating conventional commit messages, and pushing to remote. Uses industry best practices for commit message formatting.",
+      "category": "productivity",
+      "tags": ["git", "commit", "workflow", "conventional-commits", "approval-gates"],
+      "version": "1.0.0",
+      "author": {
+        "name": "David Garibay"
+      },
+      "license": "MIT",
+      "repository": "https://github.com/davidgaribay-dev/claude-code-marketplace",
+      "strict": false
+    }
+  ]
+}
