@@ -2,6 +2,7 @@
 
 A curated collection of Claude Code plugins for Git workflows and developer productivity.
 
+
 ## Quick Start
 
 ### Add this marketplace
@@ -16,6 +17,8 @@ A curated collection of Claude Code plugins for Git workflows and developer prod
 /plugin                                              # Browse available plugins
 /plugin install worktree@code-shelf    # Install specific plugin
 ```
+
+![Installation Demo](assets/installation.png)
 
 ## Available Plugins
 
