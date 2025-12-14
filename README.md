@@ -2,45 +2,45 @@
 
 A curated collection of Claude Code plugins for Git workflows and developer productivity.
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Add this marketplace
 
 ```bash
-/plugin marketplace add davidgaribay-dev/claude-code-marketplace
+/plugin marketplace add davidgaribay-dev/code-shelf
 ```
 
 ### Browse and install
 
 ```bash
 /plugin                                              # Browse available plugins
-/plugin install worktree@claude-code-marketplace    # Install specific plugin
+/plugin install worktree@code-shelf    # Install specific plugin
 ```
 
-## 📦 Available Plugins
+## Available Plugins
 
 ### Commands
 
 #### `/git-commit-push`
 Interactive git workflow with approval gates for reviewing changes, generating conventional commit messages, and pushing to remote. Uses industry best practices for commit message formatting.
 
-**Install**: `/plugin install git-commit-push@claude-code-marketplace`
+**Install**: `/plugin install git-commit-push@code-shelf`
 
 ### Skills
 
 #### `worktree`
 Create Git worktrees for parallel development. Creates standardized worktree structure in adjacent directory for working on multiple features simultaneously. Ideal for running multiple Claude Code sessions in parallel.
 
-**Install**: `/plugin install worktree@claude-code-marketplace`
+**Install**: `/plugin install worktree@code-shelf`
 
-## 💡 Why Use This Marketplace?
+## Why Use This Marketplace?
 
-- **🎯 Git-Focused**: Specialized plugins for Git workflows and productivity
-- **✅ Best Practices**: Conventional commits, approval gates, and industry standards
-- **🔧 Developer Tools**: Worktree management for parallel development
-- **📦 Granular Control**: Install only what you need, no bloat
+- **Git-Focused**: Specialized plugins for Git workflows and productivity
+- **Best Practices**: Conventional commits, approval gates, and industry standards
+- **Developer Tools**: Worktree management for parallel development
+- **Granular Control**: Install only what you need, no bloat
 
-## 🛠️ Local Development & Testing
+## Local Development & Testing
 
 ### Validate the marketplace
 
@@ -52,7 +52,7 @@ claude plugin validate .
 
 ```bash
 /plugin marketplace add .
-/plugin install worktree@claude-code-marketplace
+/plugin install worktree@code-shelf
 ```
 
 ### List configured marketplaces
@@ -61,9 +61,9 @@ claude plugin validate .
 /plugin marketplace list
 ```
 
-## 🤝 Contributing
+## Contributing
 
-Contributions welcome! Please open an issue or PR on [GitHub](https://github.com/davidgaribay-dev/claude-code-marketplace).
+Contributions welcome! Please open an issue or PR on [GitHub](https://github.com/davidgaribay-dev/code-shelf).
 
 ### Project Structure
 
@@ -107,18 +107,18 @@ Contributions welcome! Please open an issue or PR on [GitHub](https://github.com
 ```bash
 claude plugin validate .
 /plugin marketplace add .
-/plugin install your-plugin-name@claude-code-marketplace
+/plugin install your-plugin-name@code-shelf
 ```
 
-## 📄 License
+## License
 
 MIT License - see [LICENSE](LICENSE) for details
 
-## 👤 Author
+## Author
 
 **David Garibay** ([@davidgaribay-dev](https://github.com/davidgaribay-dev))
 Email: me@davidgaribay.dev
 
 ---
 
-**Repository**: [github.com/davidgaribay-dev/claude-code-marketplace](https://github.com/davidgaribay-dev/claude-code-marketplace)
+**Repository**: [github.com/davidgaribay-dev/code-shelf](https://github.com/davidgaribay-dev/code-shelf)

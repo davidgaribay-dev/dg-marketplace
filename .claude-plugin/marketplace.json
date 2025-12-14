@@ -1,5 +1,5 @@
 {
-  "name": "claude-code-marketplace",
+  "name": "code-shelf",
   "owner": {
     "name": "David Garibay",
     "email": "me@davidgaribay.dev"
@@ -8,8 +8,8 @@
     "description": "A curated collection of Claude Code plugins for Git workflows and developer productivity",
     "version": "1.0.0",
     "license": "MIT",
-    "homepage": "https://github.com/davidgaribay-dev/claude-code-marketplace",
-    "repository": "https://github.com/davidgaribay-dev/claude-code-marketplace"
+    "homepage": "https://github.com/davidgaribay-dev/code-shelf",
+    "repository": "https://github.com/davidgaribay-dev/code-shelf"
   },
   "plugins": [
     {
@@ -23,7 +23,7 @@
         "name": "David Garibay"
       },
       "license": "MIT",
-      "repository": "https://github.com/davidgaribay-dev/claude-code-marketplace",
+      "repository": "https://github.com/davidgaribay-dev/code-shelf",
       "strict": false
     },
     {
@@ -37,7 +37,7 @@
         "name": "David Garibay"
       },
       "license": "MIT",
-      "repository": "https://github.com/davidgaribay-dev/claude-code-marketplace",
+      "repository": "https://github.com/davidgaribay-dev/code-shelf",
       "strict": false
     }
   ]
