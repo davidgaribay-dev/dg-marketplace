@@ -41,6 +41,38 @@
       "keywords": ["git", "commit", "conventional-commits"],
       "category": "productivity",
       "tags": ["git", "commit", "workflow"]
+    },
+    {
+      "name": "rewind",
+      "source": "./plugins/rewind",
+      "description": "Ingest conversation data into Rewind for visualization and analysis",
+      "version": "1.0.0",
+      "author": {
+        "name": "David Garibay",
+        "email": "me@davidgaribay.dev"
+      },
+      "homepage": "https://github.com/davidgaribay-dev/dg-marketplace",
+      "repository": "https://github.com/davidgaribay-dev/dg-marketplace",
+      "license": "MIT",
+      "keywords": ["rewind", "conversation", "analytics"],
+      "category": "productivity",
+      "tags": ["rewind", "analytics", "hooks"]
+    },
+    {
+      "name": "single-command-enforcer",
+      "source": "./plugins/single-command-enforcer",
+      "description": "Block command chaining in Bash, requiring individual command approval",
+      "version": "1.0.0",
+      "author": {
+        "name": "David Garibay",
+        "email": "me@davidgaribay.dev"
+      },
+      "homepage": "https://github.com/davidgaribay-dev/dg-marketplace",
+      "repository": "https://github.com/davidgaribay-dev/dg-marketplace",
+      "license": "MIT",
+      "keywords": ["security", "bash", "command-chaining"],
+      "category": "security",
+      "tags": ["security", "bash", "hooks"]
     }
   ]
 }
