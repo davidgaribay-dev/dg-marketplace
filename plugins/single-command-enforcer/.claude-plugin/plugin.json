@@ -9,7 +9,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 $PLUGIN_DIR/hooks/single_command_enforcer.py"
+            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/hooks/single_command_enforcer.py"
           }
         ]
       }
