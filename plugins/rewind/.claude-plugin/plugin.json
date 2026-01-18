@@ -5,8 +5,12 @@
   "hooks": {
     "Stop": [
       {
-        "type": "command",
-        "command": "python3 $PLUGIN_DIR/hooks/rewind_hook.py"
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $PLUGIN_DIR/hooks/rewind_hook.py"
+          }
+        ]
       }
     ]
   }
