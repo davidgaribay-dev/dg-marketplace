@@ -1,5 +1,5 @@
 {
-  "name": "code-shelf",
+  "name": "dg-marketplace",
   "owner": {
     "name": "David Garibay",
     "email": "me@davidgaribay.dev"
@@ -7,38 +7,40 @@
   "metadata": {
     "description": "A curated collection of Claude Code plugins for Git workflows and developer productivity",
     "version": "1.0.0",
-    "license": "MIT",
-    "homepage": "https://github.com/davidgaribay-dev/code-shelf",
-    "repository": "https://github.com/davidgaribay-dev/code-shelf"
+    "pluginRoot": "./plugins"
   },
   "plugins": [
     {
       "name": "worktree",
-      "source": "./.claude/skills/worktree",
-      "description": "Create Git worktrees for parallel development. Creates standardized worktree structure in adjacent directory for working on multiple features simultaneously.",
-      "category": "productivity",
-      "tags": ["git", "worktree", "workflow", "parallel-development"],
+      "source": "./plugins/worktree",
+      "description": "Create Git worktrees for parallel development",
       "version": "1.0.0",
       "author": {
-        "name": "David Garibay"
+        "name": "David Garibay",
+        "email": "me@davidgaribay.dev"
       },
+      "homepage": "https://github.com/davidgaribay-dev/dg-marketplace",
+      "repository": "https://github.com/davidgaribay-dev/dg-marketplace",
       "license": "MIT",
-      "repository": "https://github.com/davidgaribay-dev/code-shelf",
-      "strict": false
+      "keywords": ["git", "worktree", "parallel-development"],
+      "category": "productivity",
+      "tags": ["git", "worktree", "workflow"]
     },
     {
-      "name": "git-commit-push",
-      "source": "./.claude/commands/git-commit-push.md",
-      "description": "Interactive git workflow with approval gates for reviewing changes, generating conventional commit messages, and pushing to remote. Uses industry best practices for commit message formatting.",
-      "category": "productivity",
-      "tags": ["git", "commit", "workflow", "conventional-commits", "approval-gates"],
+      "name": "git-workflow",
+      "source": "./plugins/git-workflow",
+      "description": "Interactive git commit and push with approval gates",
       "version": "1.0.0",
       "author": {
-        "name": "David Garibay"
+        "name": "David Garibay",
+        "email": "me@davidgaribay.dev"
       },
+      "homepage": "https://github.com/davidgaribay-dev/dg-marketplace",
+      "repository": "https://github.com/davidgaribay-dev/dg-marketplace",
       "license": "MIT",
-      "repository": "https://github.com/davidgaribay-dev/code-shelf",
-      "strict": false
+      "keywords": ["git", "commit", "conventional-commits"],
+      "category": "productivity",
+      "tags": ["git", "commit", "workflow"]
     }
   ]
 }

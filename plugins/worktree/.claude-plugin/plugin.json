@@ -1,0 +1,5 @@
+{
+  "name": "worktree",
+  "description": "Create Git worktrees for parallel development",
+  "version": "1.0.0"
+}

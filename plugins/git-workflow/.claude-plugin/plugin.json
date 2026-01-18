@@ -1,0 +1,5 @@
+{
+  "name": "git-workflow",
+  "description": "Interactive git commit and push with approval gates",
+  "version": "1.0.0"
+}
