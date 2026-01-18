@@ -1,0 +1,18 @@
+{
+  "name": "single-command-enforcer",
+  "version": "1.0.0",
+  "description": "Blocks command chaining in Bash tool calls, requiring each command to be approved individually",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $PLUGIN_DIR/hooks/single_command_enforcer.py"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "rewind",
+  "version": "1.0.0",
+  "description": "Claude Code hook for ingesting conversation data into Rewind",
+  "hooks": {
+    "Stop": [
+      {
+        "type": "command",
+        "command": "python3 $PLUGIN_DIR/hooks/rewind_hook.py"
+      }
+    ]
+  }
+}
