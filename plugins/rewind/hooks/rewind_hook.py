@@ -10,15 +10,21 @@ Features:
 - State tracking to avoid duplicate message ingestion
 - Incremental processing (only new lines since last run)
 - Never blocks Claude Code (returns 0 on any error)
+- Captures VM/user metadata for enterprise analytics
 
 Environment Variables:
 - REWIND_API_URL: API endpoint (default: http://localhost:8429)
 - REWIND_HOOK_ENABLED: Enable/disable hook (default: true)
 - REWIND_HOOK_DEBUG: Enable debug logging (default: false)
+- REWIND_VM_NAME: Override VM/machine name (default: auto-detected from hostname)
+- REWIND_TEAM: Team/department name for analytics grouping
+- REWIND_ENVIRONMENT: Environment label (dev, staging, prod)
 """
 
 import json
 import os
+import socket
+import subprocess
 import sys
 import urllib.request
 import urllib.error
@@ -30,6 +36,11 @@ from typing import Any
 API_URL = os.environ.get("REWIND_API_URL", "http://localhost:8429")
 HOOK_ENABLED = os.environ.get("REWIND_HOOK_ENABLED", "true").lower() == "true"
 DEBUG = os.environ.get("REWIND_HOOK_DEBUG", "false").lower() == "true"
+
+# Optional metadata overrides
+VM_NAME_OVERRIDE = os.environ.get("REWIND_VM_NAME")
+TEAM = os.environ.get("REWIND_TEAM")
+ENVIRONMENT = os.environ.get("REWIND_ENVIRONMENT")
 
 # State file location
 STATE_DIR = Path.home() / ".claude" / "state" / "rewind"
@@ -52,6 +63,104 @@ def debug(message: str) -> None:
     """Log debug message if debug mode is enabled."""
     if DEBUG:
         log(message, "DEBUG")
+
+
+def get_ip_address() -> str | None:
+    """Get the primary IP address of this machine."""
+    try:
+        # Create a socket to determine the outbound IP
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.settimeout(0.1)
+        # Doesn't actually connect, just determines route
+        s.connect(("8.8.8.8", 80))
+        ip = s.getsockname()[0]
+        s.close()
+        return ip
+    except Exception:
+        pass
+
+    # Fallback: try to get from hostname
+    try:
+        return socket.gethostbyname(socket.gethostname())
+    except Exception:
+        return None
+
+
+def get_hostname() -> str:
+    """Get the hostname of this machine."""
+    try:
+        return socket.gethostname()
+    except Exception:
+        return "unknown"
+
+
+def get_username() -> str:
+    """Get the current username."""
+    # Try multiple methods
+    for method in [
+        lambda: os.environ.get("USER"),
+        lambda: os.environ.get("USERNAME"),
+        lambda: os.getlogin(),
+        lambda: Path.home().name,
+    ]:
+        try:
+            result = method()
+            if result:
+                return result
+        except Exception:
+            continue
+    return "unknown"
+
+
+def get_os_info() -> dict[str, str | None]:
+    """Get operating system information."""
+    info = {
+        "platform": sys.platform,
+        "version": None,
+    }
+    try:
+        # Try to get OS version
+        if sys.platform == "linux":
+            try:
+                with open("/etc/os-release") as f:
+                    for line in f:
+                        if line.startswith("PRETTY_NAME="):
+                            info["version"] = line.split("=", 1)[1].strip().strip('"')
+                            break
+            except Exception:
+                pass
+        elif sys.platform == "darwin":
+            try:
+                result = subprocess.run(
+                    ["sw_vers", "-productVersion"],
+                    capture_output=True, text=True, timeout=2
+                )
+                if result.returncode == 0:
+                    info["version"] = f"macOS {result.stdout.strip()}"
+            except Exception:
+                pass
+    except Exception:
+        pass
+    return info
+
+
+def collect_metadata() -> dict[str, Any]:
+    """Collect VM/user metadata for enterprise analytics."""
+    os_info = get_os_info()
+
+    metadata = {
+        "hostname": VM_NAME_OVERRIDE or get_hostname(),
+        "ipAddress": get_ip_address(),
+        "username": get_username(),
+        "platform": os_info["platform"],
+        "osVersion": os_info["version"],
+        "team": TEAM,
+        "environment": ENVIRONMENT,
+        "collectedAt": datetime.now().isoformat(),
+    }
+
+    # Remove None values
+    return {k: v for k, v in metadata.items() if v is not None}
 
 
 def load_state() -> dict[str, Any]:
@@ -130,7 +239,11 @@ def extract_project_info(messages: list[dict[str, Any]], cwd: str) -> tuple[str,
 
 
 def send_to_api(
-    project_id: str, project_path: str, conversation_id: str, messages: list[dict[str, Any]]
+    project_id: str,
+    project_path: str,
+    conversation_id: str,
+    messages: list[dict[str, Any]],
+    metadata: dict[str, Any] | None = None,
 ) -> bool:
     """Send messages to Rewind API batch endpoint."""
     if not messages:
@@ -143,6 +256,10 @@ def send_to_api(
         "conversationId": conversation_id,
         "messages": messages,
     }
+
+    # Add metadata if provided
+    if metadata:
+        payload["metadata"] = metadata
 
     try:
         data = json.dumps(payload).encode("utf-8")
@@ -236,8 +353,12 @@ def main() -> int:
         project_id, project_path = extract_project_info(filtered_messages, cwd)
         debug(f"Project: {project_id} at {project_path}")
 
+        # Collect VM/user metadata for enterprise analytics
+        metadata = collect_metadata()
+        debug(f"Metadata: {json.dumps(metadata)}")
+
         # Send to API
-        success = send_to_api(project_id, project_path, session_id, filtered_messages)
+        success = send_to_api(project_id, project_path, session_id, filtered_messages, metadata)
 
         if success:
             log(f"Ingested {len(filtered_messages)} messages for session {session_id}")
